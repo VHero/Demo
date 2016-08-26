@@ -11,7 +11,7 @@ app.get("/", function(request, response) {
   response.end("Welcome to the homepage!");
 });
 
-app.get("/about/:who", function(req, res) {
+app.get("/about/:who?", function(req, res) {
   res.end("Hello, " + req.params.who + ".");
 });
 
