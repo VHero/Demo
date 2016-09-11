@@ -1,8 +1,14 @@
 var express = require('express');
 var app = express();
 
+// 阮一峰的express教程少了var path=require('path');
+var path = require('path');
+
+var api=require("./routes/api.js");
 // 设定port变量，意为访问端口 process.env.PORT系统默认的端口
+
 app.set('port',process.env.PORT||3000);
+
 
 // 设定views变量，意为视图存放的目录
 app.set('views', path.join(__dirname, 'views'));
@@ -20,6 +26,19 @@ app.use(app.router);
 // 目录为demo/public/images，访问
 // 网址则显示为http://localhost:3000/images
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+app.get('/', function(req, res) {
+   res.sendfile('./views/index.html');
+});
+app.get('/about',function(req,res){
+	res.sendfile('./views/about.html');
+})
+app.get('/article',function(req,res){
+	res.sendfile('./views/article.html');
+})
+app.get('/api',api.index);
 
 
 app.listen(app.get('port'));
